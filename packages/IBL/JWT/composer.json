@@ -1,0 +1,33 @@
+{
+    "name": "ibl/jwt",
+    "description": "Laravel php-jwt provides OAuth2 server support to Laravel.",
+    "keywords": ["laravel", "php-jwt", "oauth"],
+    "authors": [{
+        "name": "ravi gaudani",
+        "email": "ravi.b.gaudani@gmail.com"
+    }],
+    "require": {
+        "php": ">=5.6.4",
+        "firebase/php-jwt": "~3.0|~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "IBL\\JWT\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "IBL\\JWT\\IblJwtServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
