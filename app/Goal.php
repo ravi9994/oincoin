@@ -7,4 +7,5 @@ class Goal extends Model
 {
     protected $table = 'goals';
     public $primaryKey = 'id';
+    public $timestamps = false;
 }

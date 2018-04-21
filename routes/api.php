@@ -15,6 +15,10 @@ use Illuminate\Http\Request;
 
 Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
-Route::get('getGoals','API\GoalController@getGoals');
-Route::get('getTasks','API\TaskController@getTasks');
 Route::get('details', 'API\UserController@details');
+
+Route::get('getGoals','API\GoalController@getGoals');
+Route::post('addChildrenGoal','API\GoalController@addChildrenGoal');
+
+Route::get('getTasks', 'API\TaskController@getTasks');
+Route::post('addChildrenTask', 'API\TaskController@addChildrenTask');

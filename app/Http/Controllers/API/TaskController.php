@@ -21,9 +21,20 @@ class TaskController extends Controller
         return response()->json(['success' => $getGoals], 200);
     }
 
-    public function addChildTask(Request $request) {
+    public function addChildrenTask(Request $request) {
         $token = new Token();
         $user = $token->getUserID();
-        
+        $validator = Validator::make($request->all(), [
+            
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->errors()->all();
+            return response()->json(['error' => $messages[0]], 200);
+        } else {
+            $objTask = new Task();
+            $objTask->save();
+            return response()->json(['success' => $objTask], 200);
+        }
     }
 }
