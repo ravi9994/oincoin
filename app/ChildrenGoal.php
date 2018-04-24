@@ -3,9 +3,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class ChildrenGoal extends Model
 {
-    protected $table = 'tasks';
+    protected $table = 'children_goals';
     public $primaryKey = 'id';
-    public $timestamps = false;
 }

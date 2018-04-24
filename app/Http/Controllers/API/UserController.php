@@ -113,12 +113,6 @@ class UserController extends Controller
         } catch (\Exception $e){}
     }
 
-    public function details() {
-        $token = new Token();
-        $user = $token->getUserID();
-        return response()->json(['success' => $user], 200);
-    }
-
     function generateAccessCode() {
         $accessCode = rand (1000, 9999);
         $check = User::where('access_code',$accessCode)->first();
