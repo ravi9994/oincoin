@@ -17,8 +17,6 @@ class GoalController extends Controller
         $user = $token->getUserID();
         $validator = Validator::make($request->all(),[
             'goal_name'  => 'required',
-            'goal_value'  => 'required',
-            'number_of_months'  => 'required',
             'user_id' => 'required'
         ]);
 
@@ -30,12 +28,26 @@ class GoalController extends Controller
             $objGoal = new Goal();
             $objGoal->user_id = $request->user_id;
             $objGoal->goal_name = $request->goal_name;
-            $objGoal->goal_value = $request->goal_value;
-            $objGoal->number_of_months = $request->number_of_months;
             $objGoal->created_at = date('Y-m-d H:i:s');
             $objGoal->updated_at = date('Y-m-d H:i:s');
             $objGoal->save();
             return response()->json(['success' => $objGoal], 200);
+        }
+    }
+
+    public function getGoal(Request $request){
+        $token = new Token();
+        $user = $token->getUserID();
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->errors()->all();
+            return response()->json(['error' => $messages[0]], 200);
+        } else {
+            $getGoals = Goal::where('user_id',$request->user_id)->orWhere('user_id',null)->get();
+            return response()->json(['success' => $getGoals], 200);
         }
     }
 }

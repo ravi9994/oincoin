@@ -17,6 +17,9 @@ Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
 Route::post('addGoal','API\GoalController@addGoal');
+Route::post('getGoal','API\GoalController@getGoal');
+
 Route::post('addTask', 'API\TaskController@addTask');
+Route::post('getTask', 'API\TaskController@getTask');
 
 Route::post('assignGoalAndTaskToChildren', 'API\ChildrenController@assignGoalAndTaskToChildren');

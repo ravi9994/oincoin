@@ -20,7 +20,9 @@ class ChildrenController extends Controller
         $user = $token->getUserID();
         $validator = Validator::make($request->all(), [
             'goal_id' => 'required',
-            'task_id' => 'required',
+            'goal_value'  => 'required',
+            'number_of_months'  => 'required',
+            'tasks' => 'required',
             'user_id' => 'required',
             'children_id' => 'required'
         ]);
@@ -34,15 +36,19 @@ class ChildrenController extends Controller
             $objChildrenGoal->goal_id = $request->goal_id;
             $objChildrenGoal->user_id = $request->user_id;
             $objChildrenGoal->children_id = $request->children_id;
+            $objChildrenGoal->goal_value = $request->goal_value;
+            $objChildrenGoal->number_of_months = $request->number_of_months;
             $objChildrenGoal->created_at = date('Y-m-d H:i:s');
             $objChildrenGoal->updated_at = date('Y-m-d H:i:s');
             $objChildrenGoal->save();
 
-            $tasks = explode(',',$request->task_id);
-            foreach ($tasks as $task_id) {
+            $tasks = $request->task_id;
+            foreach ($tasks as $taskValue) {
                 $objChildrenTask = new ChildrenTask();
                 $objChildrenTask->goal_id = $request->goal_id;
-                $objChildrenTask->task_id = $task_id;
+                $objChildrenTask->task_id = $taskValue->task_id;
+                $objChildrenTask->periodicity_type = $taskValue->periodicity_type;
+                $objChildrenTask->day_of_week = $taskValue->day_of_week;
                 $objChildrenTask->created_at = date('Y-m-d H:i:s');
                 $objChildrenTask->updated_at = date('Y-m-d H:i:s');
                 $objChildrenTask->save();

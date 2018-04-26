@@ -19,8 +19,7 @@ class TaskController extends Controller
         $user = $token->getUserID();
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
-            'task_name' => 'required',
-            'periodicity_type' => 'required'
+            'task_name' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -31,12 +30,26 @@ class TaskController extends Controller
             $objTask = new Task();
             $objTask->user_id = $request->user_id;
             $objTask->task_name = $request->task_name;
-            $objTask->periodicity_type = $request->periodicity_type;
-            $objTask->day_of_week = $request->day_of_week;
             $objTask->created_at = date('Y-m-d H:i:s');
             $objTask->updated_at = date('Y-m-d H:i:s');
             $objTask->save();
             return response()->json(['success' => $objTask], 200);
+        }
+    }
+
+    public function getTask(Request $request){
+        $token = new Token();
+        $user = $token->getUserID();
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->errors()->all();
+            return response()->json(['error' => $messages[0]], 200);
+        } else {
+            $getTasks = Task::where('user_id',$request->user_id)->orWhere('user_id',null)->get();
+            return response()->json(['success' => $getTasks], 200);
         }
     }
 }
