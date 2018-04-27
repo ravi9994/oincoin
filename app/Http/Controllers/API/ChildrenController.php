@@ -42,13 +42,13 @@ class ChildrenController extends Controller
             $objChildrenGoal->updated_at = date('Y-m-d H:i:s');
             $objChildrenGoal->save();
 
-            $tasks = $request->task_id;
+            $tasks = $request->tasks;
             foreach ($tasks as $taskValue) {
                 $objChildrenTask = new ChildrenTask();
                 $objChildrenTask->goal_id = $request->goal_id;
-                $objChildrenTask->task_id = $taskValue->task_id;
-                $objChildrenTask->periodicity_type = $taskValue->periodicity_type;
-                $objChildrenTask->day_of_week = $taskValue->day_of_week;
+                $objChildrenTask->task_id = $taskValue['task_id'];
+                $objChildrenTask->periodicity_type = $taskValue['periodicity_type'];
+                $objChildrenTask->day_of_week = $taskValue['day_of_week'];
                 $objChildrenTask->created_at = date('Y-m-d H:i:s');
                 $objChildrenTask->updated_at = date('Y-m-d H:i:s');
                 $objChildrenTask->save();
