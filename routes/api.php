@@ -23,3 +23,5 @@ Route::post('addTask', 'API\TaskController@addTask');
 Route::post('getTask', 'API\TaskController@getTask');
 
 Route::post('assignGoalAndTaskToChildren', 'API\ChildrenController@assignGoalAndTaskToChildren');
+Route::post('getDashboardData', 'API\ChildrenController@getDashboardData');
+
